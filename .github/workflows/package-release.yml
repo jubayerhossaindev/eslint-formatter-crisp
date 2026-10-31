@@ -1,0 +1,99 @@
+name: Package release
+
+'on':
+  push:
+    branches: [main]
+    paths:
+      - 'packages/eslint-formatter-crisp/**'
+      - '.github/workflows/package-release.yml'
+      - 'packages/eslint-formatter-crisp/release.config.js'
+      - 'commitlint.config.js'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Run Semantic Release without publishing or creating a release
+        type: boolean
+        required: true
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Release validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.18.0
+          cache: npm
+          cache-dependency-path: packages/eslint-formatter-crisp/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+        working-directory: packages/eslint-formatter-crisp
+
+      - name: Run validation
+        run: |
+          cargo fmt --all -- --check
+          cargo check --locked
+          npm test
+          cargo clippy --all-targets --all-features --locked -- -D warnings
+          npm run typecheck
+          npm run smoke
+        env:
+          FORCE_COLOR: '0'
+        working-directory: packages/eslint-formatter-crisp
+
+      - name: Verify package
+        run: node tooling/scripts/verify-package.mjs
+        working-directory: ${{ github.workspace }}
+
+  release:
+    name: Semantic Release (npm)
+    needs: verify
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.18.0
+          package-manager-cache: false
+
+      - name: Install current npm CLI for Trusted Publishing
+        run: npm install --global npm@11.19.1
+
+      - name: Install release dependencies
+        run: npm ci --no-audit --no-fund
+        working-directory: packages/eslint-formatter-crisp
+
+      - name: Run Semantic Release dry-run
+        if: github.event_name == 'workflow_dispatch' && inputs.dry_run == true
+        working-directory: packages/eslint-formatter-crisp
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: node_modules/.bin/semantic-release --extends "$GITHUB_WORKSPACE/packages/eslint-formatter-crisp/release.config.js" --dry-run
+
+      - name: Run Semantic Release
+        if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.dry_run == false)
+        working-directory: packages/eslint-formatter-crisp
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: node_modules/.bin/semantic-release --extends "$GITHUB_WORKSPACE/packages/eslint-formatter-crisp/release.config.js"

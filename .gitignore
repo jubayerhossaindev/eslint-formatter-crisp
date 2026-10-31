@@ -1,0 +1,48 @@
+# Node.js
+node_modules/
+npm-debug.log*
+*.log
+
+# Local secrets and environment configuration
+.env
+.env.*
+!.env.example
+
+# Rust build artifacts
+target/
+
+# Moon task cache
+.moon/cache/
+
+# Documentation build output
+apps/docs/.next/
+apps/docs/out/
+apps/docs/.source/
+apps/docs/.vitepress/cache/
+apps/docs/.vitepress/dist/
+apps/docs/tsconfig.tsbuildinfo
+
+# N-API generated declarations
+.napi-generated.d.ts
+
+# npm publish tarballs
+*.tgz
+
+# Test and coverage artifacts
+coverage/
+.nyc_output/
+
+# Temporary files
+*.tmp
+*.temp
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor and IDE
+.vscode/
+.idea/
+*.swp
+*.swo

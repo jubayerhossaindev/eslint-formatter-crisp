@@ -1,0 +1,97 @@
+{
+  "name": "eslint-formatter-crisp",
+  "version": "1.0.0",
+  "description": "Good-lookin' ESLint formatter with a Rust core — fast, tiny, dependency-free",
+  "license": "MIT",
+  "author": "Jubayer Hossain",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jubayerhossaindev/eslint-formatter-crisp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jubayerhossaindev/eslint-formatter-crisp/issues"
+  },
+  "homepage": "https://github.com/jubayerhossaindev/eslint-formatter-crisp#readme",
+  "sideEffects": false,
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/jubayerhossaindev"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org",
+    "provenance": true
+  },
+  "type": "commonjs",
+  "main": "index.cjs",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.mjs",
+      "require": "./index.cjs",
+      "default": "./index.cjs"
+    },
+    "./json": {
+      "types": "./json.d.ts",
+      "default": "./json.cjs"
+    },
+    "./sarif": {
+      "types": "./sarif.d.ts",
+      "default": "./sarif.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.cjs",
+    "index.mjs",
+    "index.d.ts",
+    "json.cjs",
+    "json.d.ts",
+    "sarif.cjs",
+    "sarif.d.ts",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "SECURITY.md",
+    "*.node"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "eslint",
+    "eslint-formatter",
+    "formatter",
+    "rust",
+    "napi",
+    "terminal",
+    "pretty",
+    "cross-platform"
+  ],
+  "scripts": {
+    "build": "napi build --platform --release --dts .napi-generated.d.ts",
+    "build:debug": "napi build --platform --dts .napi-generated.d.ts",
+    "test": "cargo test --locked && node --test",
+    "test:node": "node --test",
+    "typecheck": "tsc --strict --noEmit --moduleResolution node16 --module node16 --types node ci/types-consumer.ts",
+    "smoke": "node -e \"const crisp = require('./index.cjs'); if (!crisp.nativeLoaded()) process.exit(1)\" && node --input-type=module -e \"import crisp, { nativeLoaded } from './index.mjs'; if (typeof crisp !== 'function' || !nativeLoaded()) process.exit(1)\""
+  },
+  "devDependencies": {
+    "@napi-rs/cli": "^3.10.9",
+    "@semantic-release/changelog": "^7.0.0",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^11.0.1",
+    "@semantic-release/github": "^12.0.10",
+    "@semantic-release/npm": "^13.2.0",
+    "@semantic-release/release-notes-generator": "^14.1.1",
+    "@types/node": "26.6.5",
+    "conventional-changelog-conventionalcommits": "^9.3.1",
+    "semantic-release": "^25.0.9",
+    "typescript": "7.0.2"
+  },
+  "napi": {
+    "binaryName": "crisp",
+    "dts": ".napi-generated.d.ts"
+  }
+}

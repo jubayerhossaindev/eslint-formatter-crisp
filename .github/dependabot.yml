@@ -1,0 +1,65 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /packages/eslint-formatter-crisp
+    schedule:
+      interval: weekly
+      day: monday
+    groups:
+      package-dependencies:
+        patterns:
+          - '*'
+        update-types:
+          - "minor"
+          - "patch"
+    ignore:
+      - dependency-name: "napi"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "napi-derive"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@napi-rs/cli"
+        update-types: ["version-update:semver-major"]
+    commit-message:
+      prefix: chore(package)
+  - package-ecosystem: npm
+    directory: /apps/docs
+    schedule:
+      interval: weekly
+      day: monday
+    groups:
+      docs-dependencies:
+        patterns:
+          - '*'
+        update-types:
+          - "minor"
+          - "patch"
+    commit-message:
+      prefix: chore(docs)
+  - package-ecosystem: cargo
+    directory: /packages/eslint-formatter-crisp
+    schedule:
+      interval: weekly
+      day: monday
+    ignore:
+      - dependency-name: "napi"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "napi-derive"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "criterion"
+        update-types: ["version-update:semver-major"]
+    commit-message:
+      prefix: chore(package)
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    groups:
+      actions:
+        patterns:
+          - '*'
+        update-types:
+          - "minor"
+          - "patch"
+    commit-message:
+      prefix: chore(repo)

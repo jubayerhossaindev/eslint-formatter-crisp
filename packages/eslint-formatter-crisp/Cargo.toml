@@ -1,0 +1,31 @@
+[package]
+  name = "eslint-formatter-crisp"
+  version = "1.0.0"
+  edition = "2024"
+  license = "MIT"
+  description = "Good-lookin' ESLint formatter with a Rust core, delivered via N-API"
+
+[lib]
+  crate-type = ["cdylib", "rlib"]
+  path = "src/lib.rs"
+
+[build-dependencies]
+  napi-build = "2"
+
+[dependencies]
+  napi = { version = "2", default-features = false, features = ["napi8"] }
+  napi-derive = "2"
+  unicode-width = "0.2"
+
+[profile.release]
+  strip = true
+  lto = "fat"
+  codegen-units = 1
+
+[dev-dependencies]
+  criterion = { version = "0.5", features = ["html_reports"] }
+  proptest = "1.5"
+
+[[bench]]
+  name = "format"
+  harness = false

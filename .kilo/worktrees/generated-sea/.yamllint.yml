@@ -1,0 +1,21 @@
+extends: default
+
+ignore: |
+  /node_modules/
+  /dist/
+  /build/
+  /coverage/
+  /.git/
+
+rules:
+  document-start: disable
+  line-length: disable
+  truthy:
+    allowed-values: ['true', 'false', 'on', 'off', 'yes', 'no']
+    check-keys: false
+  indentation:
+    spaces: 2
+    indent-sequences: true
+  comments:
+    level: warning
+    min-spaces-from-content: 1

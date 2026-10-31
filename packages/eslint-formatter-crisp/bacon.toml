@@ -1,0 +1,59 @@
+default_job = "check"
+
+[sound]
+  enabled = true
+  base_volume = "100%"
+
+[paths]
+  watch = ["src", "examples", "benches"]
+  ignore = ["target", ".git"]
+
+[jobs.check]
+  command = ["cargo", "check"]
+  need_stdout = false
+  watch = ["src"]
+  on_success = "play-sound(name=success,volume=70)"
+  on_failure = "play-sound(name=beep-warning,volume=100)"
+
+[jobs.test]
+  command = ["cargo", "test"]
+  need_stdout = true
+  watch = ["src", "tests"]
+  on_success = "play-sound(name=success,volume=60)"
+  on_failure = "play-sound(name=beep-warning,volume=100)"
+
+[jobs.clippy]
+  command = ["cargo", "clippy"]
+  need_stdout = false
+  watch = ["src"]
+  on_success = "play-sound(name=success,volume=50)"
+  on_failure = "play-sound(name=beep-warning,volume=100)"
+
+[jobs.soundtest]
+  command = ["cargo", "--version"]
+  need_stdout = true
+  on_success = "play-sound(name=success,volume=100)"
+  on_failure = "play-sound(name=beep-warning,volume=100)"
+
+[exports.locations]
+  auto = true
+  path = ".bacon-locations"
+  line_format = "{kind} {path}:{line}:{column} {message}"
+
+[keybindings]
+  r = "job:check"
+  t = "job:test"
+  c = "job:clippy"
+  s = "job:soundtest"
+  F5 = "rerun"
+
+[skin]
+  status_fg = 251
+  status_bg = 4
+  key_fg = 11
+
+[jobs.js]
+  command = ["npm", "run", "lint"]
+  analyzer = "eslint"
+  watch = ["src"]
+  need_stdout = true

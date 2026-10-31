@@ -1,0 +1,46 @@
+# Build & Output Directories
+dist/
+build/
+out/
+coverage/
+.nyc_output/
+.moon/cache/
+apps/docs/.next/
+apps/docs/.source/
+apps/docs/next-env.d.ts
+
+# Dependencies
+node_modules/
+
+# Lockfiles & Auto-generated Docs (Avoid git diff noise & slow formatting)
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+bun.lockb
+CHANGELOG.md
+
+# Environment & Local Secrets
+.env
+.env.*
+
+# Git & Git Hooks
+.git/
+.husky/_
+
+# IDEs, AI Sessions & Caches
+.claude/
+.vscode/
+.idea/
+.cache/
+
+# Custom Scripts & Backup Folders
+backup/
+success/
+tryprompt.md
+mcpize.yaml
+
+# Assets & Minified Files
+public/
+*.min.js
+*.min.css
+*.svg

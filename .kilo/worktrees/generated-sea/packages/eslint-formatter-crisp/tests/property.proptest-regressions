@@ -1,0 +1,8 @@
+# Seeds for failure cases proptest has generated in the past. It is
+# automatically read and these particular cases re-run before any
+# novel cases are generated.
+#
+# It is recommended to check this file in to source control so that
+# everyone who runs the test benefits from these saved cases.
+cc 4e84f9753f766049641d33c65bcd537003ec7fac3360bff0a37914b0115bd4ef # shrinks to results = [LintResult { file_path: "", source: None, output: None, error_count: 0, warning_count: 1, messages: [LintMessage { message: "", severity: Some(1), line: 0, column: 0, rule_id: None, fatal: false, fixable: false, suggestion: None }] }]
+cc e06de1bad165754a819540ef309b4a441407050af4450a2632ed95fba81ef717 # shrinks to results = [LintResult { file_path: "", source: None, output: None, error_count: 0, warning_count: 1, messages: [LintMessage { message: "", severity: Some(1), line: 0, column: 0, rule_id: None, fatal: false, fixable: false, suggestion: None }] }]

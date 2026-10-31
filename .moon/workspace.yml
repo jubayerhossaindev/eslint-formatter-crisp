@@ -1,0 +1,15 @@
+$schema: 'https://moonrepo.dev/schemas/workspace.json'
+projects:
+  eslint-formatter-crisp: packages/eslint-formatter-crisp
+  docs: apps/docs
+versionConstraint: '2.6.5'
+vcs:
+  defaultBranch: main
+hasher:
+  walkStrategy: glob
+  ignoreMissingPatterns:
+    - '**/.env'
+    - '**/.env.*'
+pipeline:
+  installDependencies: false
+  autoCleanCache: true

@@ -1,0 +1,154 @@
+name: Bug report
+description: Report a rendering glitch, crash, or wrong output in eslint-formatter-crisp
+title: '[bug] '
+labels: ['bug', 'needs-triage']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug report for
+        `eslint-formatter-crisp`. The more detail you provide up front, the
+        faster we can reproduce and fix it. Please fill in every field below —
+        the OS / Node / ESLint / crisp version quartet is the difference
+        between a one-shot fix and a long back-and-forth.
+
+        For **security-sensitive** issues (control-char injection, hostile-input
+        crashes, native-load abuse) please do **not** open a public issue.
+        Follow [SECURITY.md](https://github.com/ReactJSLover/eslint-formatter-crisp/blob/main/SECURITY.md)
+        and open a private security advisory instead.
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      description: The OS you ran ESLint on. Pick the closest match.
+      options:
+        - Windows 10 / 11
+        - macOS Intel (x64)
+        - macOS Apple Silicon (arm64)
+        - Linux x64
+        - Linux ARM64
+        - Alpine Linux (musl)
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: node
+    attributes:
+      label: Node.js version
+      description: Output of `node --version` (without the leading `v`).
+      options:
+        - '18'
+        - '20'
+        - '22'
+        - '24'
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: eslint
+    attributes:
+      label: ESLint version
+      description: Output of `npx eslint --version`. Both ESLint 8 and 9 are supported.
+      placeholder: '9.x.x'
+    validations:
+      required: true
+
+  - type: input
+    id: crisp
+    attributes:
+      label: eslint-formatter-crisp version
+      description: Output of `npm ls eslint-formatter-crisp` or the version field in your lockfile.
+      placeholder: '0.5.0'
+      value: '0.5.0'
+    validations:
+      required: true
+
+  - type: input
+    id: invocation
+    attributes:
+      label: How crisp is invoked
+      description: The exact ESLint command. Include `-f crisp` (or the path form `-f node_modules/eslint-formatter-crisp/json.cjs` for the machine-readable subpath formatters).
+      placeholder: 'npx eslint . -f crisp'
+    validations:
+      required: true
+
+  - type: textarea
+    id: env
+    attributes:
+      label: Relevant environment variables
+      description: |
+        Any `CRISP_*` / `MO_*` / color-related variables you set. See the
+        README's "Environment variables at a glance" table for the full list.
+      placeholder: |
+        CRISP_MAX_MESSAGES=0
+        FORCE_COLOR=1
+        COLUMNS=120
+        CRISP_ASCII=1
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What you expected crisp to render.
+      placeholder: 'The `no-unused-vars` warning should show a caret under the variable name and the message aligned to the right of the `└─` connector.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: |
+        What crisp actually rendered. **Paste the terminal output verbatim,
+        wrapped in triple backticks.** If the output contains ANSI escapes,
+        keep them — they help diagnose color-level detection issues. If the
+        process crashed, paste the full stack trace.
+      placeholder: |
+        ```
+        ./broken.js 🔥 5 errors 2 warnings 🔥
+        ...
+        ```
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal reproducible example
+      description: |
+        The smallest setup that triggers the issue. A bug we can reproduce is
+        a bug we can fix. Please include:
+
+        1. A small `.js` (or other lintable) file that triggers the rule.
+        2. Your ESLint config (`eslint.config.js` or `.eslintrc.*`).
+        3. The exact command you ran.
+
+        If the issue only reproduces with a plugin rule, include the plugin
+        name and version.
+      placeholder: |
+        // broken.js
+        const unusedVar = 42;
+        console.log("hello " + name)
+
+        ```js
+        // eslint.config.js
+        import js from "@eslint/js";
+        export default [
+          js.configs.recommended,
+          { rules: { "no-console": "warn" } },
+        ];
+        ```
+
+        ```shell
+        npx eslint broken.js -f crisp
+        ```
+      render: shell
+    validations:
+      required: true

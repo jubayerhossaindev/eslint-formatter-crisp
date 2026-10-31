@@ -1,0 +1,23 @@
+$schema: 'https://moonrepo.dev/schemas/tasks.json'
+fileGroups:
+  configs:
+    - '*.json'
+    - '*.yml'
+    - '*.yaml'
+    - '*.toml'
+  docs:
+    - '**/*.md'
+    - '**/*.mdx'
+  tests:
+    - 'test/**/*'
+    - 'tests/**/*'
+    - 'ci/**/*'
+taskOptions:
+  cache: false
+tasks:
+  repo-verify:
+    command: node tooling/scripts/verify-monorepo.mjs
+    toolchains: [node]
+    options:
+      runFromWorkspaceRoot: true
+      cache: false

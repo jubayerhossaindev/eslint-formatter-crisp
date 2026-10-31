@@ -1,0 +1,149 @@
+# ============================
+# Taplo Global Configuration
+# ============================
+
+include = ["**/*.toml"]
+exclude = [".git/**", "node_modules/**", "target/**"]
+
+# ============================
+# Formatting (Safe defaults)
+# ============================
+[formatting]
+  align_entries = false
+  align_comments = false
+  allowed_blank_lines = 2
+  array_auto_collapse = true
+  array_auto_expand = true
+  array_trailing_comma = true
+  column_width = 100
+  compact_arrays = true
+  compact_entries = false
+  compact_inline_tables = false
+  crlf = false
+  indent_entries = true
+  indent_tables = true
+  indent_string = "  "
+  inline_table_expand = true
+  reorder_arrays = false
+  reorder_inline_tables = false
+  reorder_keys = false
+  trailing_newline = true
+
+# ============================
+# RULE: Cargo.toml (Schema + Lint + Sort deps)
+# ============================
+[[rule]]
+  include = ["**/Cargo.toml"]
+  keys = ["dependencies"]
+
+  # 🔥 This is the CORRECT place for schema
+  [rule.schema]
+    path = "https://json.schemastore.org/cargo.json"
+    enabled = true
+
+  [rule.formatting]
+    reorder_keys = true
+
+
+    # # ============================
+    # # Taplo Global Configuration
+    # # ============================
+
+    # # Search all TOML files by default
+    # include = ["**/*.toml"]
+
+    # # Exclude generated / unwanted directories
+    # exclude = [".git/**", "node_modules/**", "target/**"]
+
+    # # ============================
+    # # Formatting Options (from official docs)
+    # # ============================
+
+    # [formatting]
+    #   align_comments        = true
+    #   align_entries         = false
+    #   allowed_blank_lines   = 2
+    #   array_auto_collapse   = true
+    #   array_auto_expand     = true
+    #   array_trailing_comma  = true
+    #   column_width          = 80
+    #   compact_arrays        = true
+    #   compact_entries       = false
+    #   compact_inline_tables = false
+    #   crlf                  = false
+    #   indent_entries        = false
+    #   indent_string         = "  "  # two spaces
+    #   indent_tables         = false
+    #   inline_table_expand   = true
+    #   reorder_arrays        = false
+    #   reorder_inline_tables = false
+    #   reorder_keys          = false # keep stable globally
+    #   trailing_newline      = true
+
+    #   # ============================
+    #   # Rules (Cargo.toml special handling)
+    #   # ============================
+
+    # # Only reorder keys inside [dependencies] of Cargo.toml
+    # [[rule]]
+    #   include = ["**/Cargo.toml"]
+    #   keys    = ["dependencies"]
+
+    #   [rule.formatting]
+    #     reorder_keys = true
+
+
+    # # ============================
+    # # Taplo Global Configuration
+    # # ============================
+
+    # # Include all TOML files by default
+    # include = ["**/*.toml"]
+
+    # # Exclude only unwanted directories
+    # exclude = [
+    #   "target/**",
+    #   ".git/**",
+    #   "node_modules/**"
+    # ]
+
+    # # ============================
+    # # Formatting Options
+    # # ============================
+    # [formatting]
+    # align_entries = true
+    # align_comments = true
+    # array_trailing_comma = true
+    # array_auto_expand = true
+    # array_auto_collapse = true
+    # compact_arrays = true
+    # compact_inline_tables = false
+    # inline_table_expand = true
+    # compact_entries = false
+    # column_width = 100
+    # indent_tables = true
+    # indent_entries = true
+    # indent_string = "  "   # two spaces
+    # trailing_newline = true
+    # reorder_keys = true
+    # reorder_arrays = true
+    # reorder_inline_tables = true
+    # allowed_blank_lines = 2
+    # crlf = false
+
+    # # ============================
+    # # Schema (enable Taplo built-in)
+    # # ============================
+    # [schema]
+    # enabled = true
+    # path = "taplo://taplo.toml"
+
+    # # ============================
+    # # Rules (optional example)
+    # # ============================
+    # [[rule]]
+    # include = ["**/Cargo.toml"]
+    # keys = ["dependencies"]
+
+    # [rule.formatting]
+    # reorder_keys = true

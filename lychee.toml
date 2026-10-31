@@ -1,0 +1,19 @@
+format = "compact"
+mode = "color"
+timeout = 20
+max_concurrency = 128
+max_retries = 3
+retry_wait_time = 1
+max_redirects = 10
+exclude_all_private = true
+exclude = [
+  'https://(www\.)?linkedin\.com/.*',
+  'https://(www\.)?twitter\.com/.*',
+  'https://(www\.)?x\.com/.*',
+  'https://(www\.)?facebook\.com/.*',
+]
+extensions = ["md", "mkd", "mdx", "markdown", "html", "htm", "txt", "xml"]
+include_verbatim = false
+cache = true
+max_cache_age = "1d"
+cache_exclude_status = ["429", "500..=599"]
