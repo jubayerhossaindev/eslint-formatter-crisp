@@ -2,7 +2,7 @@
 
 ### Bug Fixes
 
-* **package:** prepare for initial npm release ([5939a9e](https://github.com/jubayerhossaindev/eslint-formatter-crisp/commit/5939a9e64f8a26fbdfe4b3f808751382287a8113))
+- **package:** prepare for initial npm release ([5939a9e](https://github.com/jubayerhossaindev/eslint-formatter-crisp/commit/5939a9e64f8a26fbdfe4b3f808751382287a8113))
 
 ## 1.0.0 (2026-11-03)
 
