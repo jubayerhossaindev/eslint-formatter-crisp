@@ -1,0 +1,169 @@
+# ------------------------------------------------------------
+# Unsafe Code Documentation
+# ------------------------------------------------------------
+
+accept-comment-above-attributes = true
+accept-comment-above-statement = true
+
+# ------------------------------------------------------------
+# Test Code Policies
+# ------------------------------------------------------------
+
+allow-dbg-in-tests = false
+allow-expect-in-consts = false
+allow-expect-in-tests = true
+allow-indexing-slicing-in-tests = true
+allow-one-hash-in-raw-strings = false
+allow-panic-in-tests = true
+allow-print-in-tests = false
+allow-unwrap-in-consts = false
+allow-unwrap-in-tests = true
+allow-useless-vec-in-tests = false
+
+# ------------------------------------------------------------
+# MSRV and Documentation Checks
+# ------------------------------------------------------------
+
+check-incompatible-msrv-in-tests = true
+check-private-items = true
+
+doc-valid-idents = ["API", "HTTP", "URL", ".."]
+
+# ------------------------------------------------------------
+# Module Item Ordering
+# ------------------------------------------------------------
+
+module-item-order-groupings = [
+  [
+    "externs",
+    [
+      "extern_crate",
+    ],
+  ],
+  [
+    "modules",
+    [
+      "mod",
+    ],
+  ],
+  [
+    "foreign",
+    [
+      "foreign_mod",
+    ],
+  ],
+  [
+    "uses",
+    [
+      "use",
+    ],
+  ],
+  [
+    "macros",
+    [
+      "macro",
+    ],
+  ],
+  [
+    "asm",
+    [
+      "global_asm",
+    ],
+  ],
+  [
+    "statics",
+    [
+      "static",
+    ],
+  ],
+  [
+    "consts",
+    [
+      "const",
+    ],
+  ],
+  [
+    "type_aliases",
+    [
+      "ty_alias",
+    ],
+  ],
+  [
+    "enums",
+    [
+      "enum",
+    ],
+  ],
+  [
+    "structs",
+    [
+      "struct",
+    ],
+  ],
+  [
+    "unions",
+    [
+      "union",
+    ],
+  ],
+  [
+    "traits",
+    [
+      "trait",
+    ],
+  ],
+  [
+    "trait_aliases",
+    [
+      "trait_alias",
+    ],
+  ],
+  [
+    "impls",
+    [
+      "impl",
+    ],
+  ],
+  [
+    "functions",
+    [
+      "fn",
+    ],
+  ],
+]
+
+# Alphabetical ordering inside use/import group.
+module-items-ordered-within-groupings = ["uses"]
+
+# Source item ordering.
+source-item-ordering = ["module", "struct", "enum", "trait", "impl"]
+
+# Trait associated item ordering.
+trait-assoc-item-kinds-order = ["const", "type", "fn"]
+
+# ------------------------------------------------------------
+# Complexity and Maintainability
+# ------------------------------------------------------------
+
+excessive-nesting-threshold = 5
+max-fn-params-bools = 1
+too-many-lines-threshold = 150
+
+# ------------------------------------------------------------
+# Resource and Stack Safety
+# ------------------------------------------------------------
+
+max-include-file-size = 100000
+
+# ------------------------------------------------------------
+# Path and Idiom Preferences
+# ------------------------------------------------------------
+
+absolute-paths-max-segments = 4
+enforce-iter-loop-reborrow = true
+
+# ------------------------------------------------------------
+# Unsafe Macro Safety
+# ------------------------------------------------------------
+
+warn-unsafe-macro-metavars-in-private-macros = true

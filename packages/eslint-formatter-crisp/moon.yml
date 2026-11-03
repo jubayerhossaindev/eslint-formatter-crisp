@@ -1,0 +1,61 @@
+$schema: 'https://moonrepo.dev/schemas/project.json'
+language: rust
+layer: library
+project:
+  description: Rust-backed ESLint formatter distributed as a Node.js npm package.
+tasks:
+  install:
+    command: npm ci
+    toolchains: [node, npm]
+    options:
+      cache: false
+  build:
+    command: cargo build --locked
+    toolchains: [rust]
+    options:
+      cache: false
+  check:
+    command: cargo check --locked
+    toolchains: [rust]
+    options:
+      cache: false
+  lint:
+    command: cargo clippy --all-targets --all-features --locked -- -D warnings
+    toolchains: [rust]
+    options:
+      cache: false
+  test:
+    command: npm test
+    toolchains: [node, npm, rust]
+    env:
+      FORCE_COLOR: '0'
+    options:
+      cache: false
+  typecheck:
+    command: npm run typecheck
+    toolchains: [node, npm]
+    options:
+      cache: false
+  smoke:
+    command: npm run smoke
+    toolchains: [node, npm]
+    options:
+      cache: false
+  pack:
+    command: node ../../tooling/scripts/verify-package.mjs
+    toolchains: [node]
+    options:
+      cache: false
+  verify:
+    command: node ../../tooling/scripts/verify-package.mjs
+    toolchains: [node]
+    deps:
+      - check
+      - lint
+      - test
+      - typecheck
+      - smoke
+      - pack
+      - repo-verify
+    options:
+      cache: false

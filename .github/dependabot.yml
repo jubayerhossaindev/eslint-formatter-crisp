@@ -1,0 +1,18 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/packages/eslint-formatter-crisp'
+    schedule:
+      interval: 'monthly'
+
+  - package-ecosystem: 'cargo'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+    ignore:
+      - dependency-name: 'criterion'
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'monthly'

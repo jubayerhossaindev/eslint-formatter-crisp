@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+npm run lint
+npm -C packages/eslint-formatter-crisp run format:check
+npm -C packages/eslint-formatter-crisp run test:node

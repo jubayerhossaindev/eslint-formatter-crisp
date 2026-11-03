@@ -1,0 +1,68 @@
+name: Feature request
+description: Suggest a new formatter feature, env var, or platform target for eslint-formatter-crisp
+title: '[feat] '
+labels: ['enhancement', 'needs-triage']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for thinking about how to make `eslint-formatter-crisp`
+        better. Before opening a feature request, please skim the README's
+        "Intentional differences from eslint-formatter-mo" section and the
+        CHANGELOG — your idea may already be on the roadmap, or may be a
+        deliberate non-goal.
+
+        Crisp's design constraint is **zero runtime dependencies** with a
+        small Rust core: any feature that needs an npm dep, a TextMate
+        grammar, or a WASM bundle is unlikely to be accepted as-is, but a
+        leaner variant of the same idea often is. The questions below help
+        us see whether the feature fits that constraint.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What's missing or painful right now? A concrete story ("when I lint X, I have to manually do Y") is more useful than an abstract wish.
+      placeholder: 'When a single file has 100+ messages, the caret stack becomes hard to scan — I end up counting rows to find which caret belongs to which message.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: |
+        What should crisp do instead? Be specific about the output shape —
+        an ASCII mockup of the rendered output is ideal. If you have a
+        preferred env-var name, suggest it (the project uses `CRISP_*` for
+        native vars and `MO_*` for mo-compat shims).
+      placeholder: |
+        Add a `CRISP_COLLAPSE_STACK=1` mode that, after the first caret+message
+        row in a column group, renders subsequent messages on a single
+        indented line prefixed with `├─`:
+
+        ```
+         1: const unusedVar = 42;
+                  ↑
+                  └─ ⚠ unusedVar is assigned a value but never used. [ no-unused-vars ]
+        ```
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What other ways did you think about solving this, and why didn't they work? Mentioning other formatters (mo, stylish, codeframe, pretty) that handle it differently is welcome.
+      placeholder: "I considered just raising CRISP_MAX_MESSAGES, but that doesn't help readability — it just produces more output. stylish's approach of one line per message works for small files but loses the column-grouping that makes crisp readable."
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Anything else relevant. Screenshots of the rendered output, links to related issues, draft PRs, prior art in other tools.
+      placeholder: 'Related: #123, #456. mo handles this by [link]. I have a working prototype at [branch URL].'
+    validations:
+      required: false

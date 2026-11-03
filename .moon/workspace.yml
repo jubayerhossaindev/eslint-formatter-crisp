@@ -1,0 +1,16 @@
+$schema: 'https://moonrepo.dev/schemas/workspace.json'
+projects:
+  crisp-core: crates/crisp-core
+  crisp-native: crates/crisp-native
+  eslint-formatter-crisp: packages/eslint-formatter-crisp
+versionConstraint: '2.6.5'
+vcs:
+  defaultBranch: main
+hasher:
+  walkStrategy: glob
+  ignoreMissingPatterns:
+    - '**/.env'
+    - '**/.env.*'
+pipeline:
+  installDependencies: false
+  autoCleanCache: true

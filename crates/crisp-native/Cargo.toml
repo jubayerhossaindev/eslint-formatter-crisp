@@ -1,0 +1,22 @@
+[package]
+name = "crisp-native"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+description = "N-API binding for crisp-core, distributed as the crisp .node addon"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+path = "src/lib.rs"
+
+[build-dependencies]
+napi-build = "2"
+
+[dependencies]
+crisp-core = { path = "../crisp-core" }
+napi = { version = "3", default-features = false, features = ["napi8", "dyn-symbols"] }
+napi-derive = "3"
+
+[features]
+default = []
+noop = ["napi/noop", "napi-derive/noop"]

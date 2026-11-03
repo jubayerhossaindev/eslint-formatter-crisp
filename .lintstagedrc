@@ -1,0 +1,8 @@
+{
+  "*.{js,mjs}": [
+    "eslint --fix --config packages/eslint-formatter-crisp/eslint.config.js",
+    "prettier --write"
+  ],
+  "*.{json,jsonc,css,scss,yml,yaml}": ["prettier --write"],
+  "*.md": ["markdownlint-cli2 --fix", "prettier --write"]
+}

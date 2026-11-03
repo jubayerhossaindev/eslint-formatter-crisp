@@ -1,0 +1,11 @@
+# Build & Output Directories
+coverage/
+.nyc_output/
+dist/
+build/
+out/
+target/
+.moon/cache/
+node_modules/
+.napi-generated.d.ts
+index.js

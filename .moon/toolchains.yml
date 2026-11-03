@@ -1,0 +1,11 @@
+$schema: 'https://moonrepo.dev/schemas/toolchain.json'
+
+node:
+  version: '24.22.2'
+  packageManager: npm
+  inferTasksFromScripts: false
+  npm:
+    version: '12.2.1'
+
+rust:
+  version: '1.99.1'

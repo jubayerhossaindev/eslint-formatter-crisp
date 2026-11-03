@@ -1,0 +1,117 @@
+{
+  "name": "eslint-formatter-crisp",
+  "version": "1.0.0",
+  "description": "Good-looking' ESLint formatter with a Rust core — fast, tiny, dependency-free",
+  "license": "MIT",
+  "author": "Jubayer Hossain",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jubayerhossaindev/eslint-formatter-crisp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jubayerhossaindev/eslint-formatter-crisp/issues"
+  },
+  "homepage": "https://github.com/jubayerhossaindev/eslint-formatter-crisp#readme",
+  "sideEffects": false,
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/jubayerhossaindev"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org",
+    "provenance": true
+  },
+  "type": "module",
+  "main": "index.mjs",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.mjs",
+      "default": "./index.mjs"
+    },
+    "./json": {
+      "types": "./json.d.ts",
+      "default": "./json.mjs"
+    },
+    "./sarif": {
+      "types": "./sarif.d.ts",
+      "default": "./sarif.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.mjs",
+    "index.d.ts",
+    "json.mjs",
+    "json.d.ts",
+    "sarif.mjs",
+    "sarif.d.ts",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "SECURITY.md",
+    "*.node"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "eslint",
+    "eslint-formatter",
+    "formatter",
+    "rust",
+    "napi",
+    "terminal",
+    "pretty",
+    "cross-platform"
+  ],
+  "scripts": {
+    "build": "napi build --manifest-path ../../Cargo.toml --package crisp-native --package-json-path package.json --output-dir . --platform --release --dts .napi-generated.d.ts",
+    "build:debug": "napi build --manifest-path ../../Cargo.toml --package crisp-native --package-json-path package.json --output-dir . --platform --dts .napi-generated.d.ts",
+    "test": "cargo test --workspace --features crisp-native/noop && node --test",
+    "test:node": "node --test",
+    "typecheck": "tsc --project jsconfig.json --strict --noEmit",
+    "smoke": "node --input-type=module -e \"import('./index.mjs').then(m => console.log(m.nativeLoaded()))\"",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@babel/core": "^8.1.0",
+    "@babel/eslint-parser": "^8.0.7",
+    "@babel/preset-env": "^8.0.7",
+    "@eslint/compat": "^2.1.1",
+    "@eslint/eslintrc": "^3.3.7",
+    "@eslint/js": "^10.0.1",
+    "@napi-rs/cli": "^3.10.9",
+    "@semantic-release/changelog": "^7.0.0",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^11.0.1",
+    "@semantic-release/github": "^12.0.10",
+    "@semantic-release/npm": "^13.2.0",
+    "@semantic-release/release-notes-generator": "^14.1.1",
+    "@types/node": "26.6.5",
+    "conventional-changelog-conventionalcommits": "9.3.1",
+    "eslint": "^10.14.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-node": "^0.4.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-n": "^18.5.0",
+    "eslint-plugin-prettier": "^5.5.7",
+    "eslint-plugin-promise": "^7.3.0",
+    "eslint-plugin-security": "^4.2.1",
+    "eslint-plugin-sonarjs": "^4.2.2",
+    "eslint-plugin-unicorn": "^79.0.0",
+    "globals": "^17.14.0",
+    "prettier": "^3.9.10",
+    "semantic-release": "^25.0.9",
+    "taze": "^21.3.0",
+    "typescript": "^6.0.3"
+  },
+  "napi": {
+    "binaryName": "crisp",
+    "dts": ".napi-generated.d.ts"
+  }
+}

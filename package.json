@@ -1,0 +1,33 @@
+{
+  "name": "eslint-formatter-crisp-workspace",
+  "private": true,
+  "type": "module",
+  "packageManager": "npm@12.2.1",
+  "engines": {
+    "node": ">=24.18.0",
+    "npm": ">=11.19.1"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "lint": "npm run lint:markdown && npm run lint:spelling",
+    "lint:markdown": "markdownlint-cli2 \"**/*.md\" \".github/**/*.md\" \"#**/node_modules/**\"",
+    "lint:spelling": "cspell lint .",
+    "format": "prettier --check . && cargo fmt --all -- --check",
+    "lint-staged": "lint-staged",
+    "test": "moon run :test",
+    "verify:monorepo": "node tooling/scripts/verify-monorepo.mjs"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.2.4",
+    "@commitlint/config-conventional": "^21.2.4",
+    "@commitlint/types": "^21.2.3",
+    "@cspell/dict-bn": "^1.0.6",
+    "cspell": "^10.4.0",
+    "eslint": "^10.14.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
+    "markdownlint-cli2": "^0.24.0",
+    "prettier": "3.9.10",
+    "taze": "^21.3.0"
+  }
+}

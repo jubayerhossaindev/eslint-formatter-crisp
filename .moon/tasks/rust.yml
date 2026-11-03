@@ -1,0 +1,11 @@
+$schema: '../cache/schemas/tasks.json'
+
+inheritedBy:
+  toolchains:
+    or: ['rust']
+
+taskOptions:
+  cache: false
+
+# Rust tasks are defined per-crate in crates/*/moon.yml.
+# This file holds the global Rust task-group conventions.

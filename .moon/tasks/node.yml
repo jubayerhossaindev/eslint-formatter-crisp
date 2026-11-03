@@ -1,0 +1,22 @@
+fileGroups:
+  configs:
+    - '*.json'
+    - '*.yml'
+    - '*.yaml'
+    - '*.toml'
+
+  tests:
+    - 'test/**/*'
+    - 'tests/**/*'
+    - 'ci/**/*'
+
+taskOptions:
+  cache: false
+
+tasks:
+  repo-verify:
+    command: node tooling/scripts/verify-monorepo.mjs
+    toolchains: [node]
+    options:
+      runFromWorkspaceRoot: true
+      cache: false

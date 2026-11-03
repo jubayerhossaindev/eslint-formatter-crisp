@@ -1,0 +1,36 @@
+$schema: 'https://moonrepo.dev/schemas/project.json'
+language: rust
+layer: library
+project:
+  description: Pure Rust formatting engine for eslint-formatter-crisp.
+tasks:
+  build:
+    command: cargo build --locked
+    toolchains: [rust]
+    options:
+      cache: false
+  check:
+    command: cargo check --locked
+    toolchains: [rust]
+    options:
+      cache: false
+  lint:
+    command: cargo clippy --all-targets --all-features --locked -- -D warnings
+    toolchains: [rust]
+    options:
+      cache: false
+  test:
+    command: cargo test --locked
+    toolchains: [rust]
+    options:
+      cache: false
+  bench:
+    command: cargo bench --locked
+    toolchains: [rust]
+    options:
+      cache: false
+  fmt:
+    command: cargo fmt --all -- --check
+    toolchains: [rust]
+    options:
+      cache: false

@@ -1,0 +1,24 @@
+# Source
+src/
+tests/
+test/
+benches/
+target/
+ci/
+*.rs
+*.toml
+!Cargo.toml
+Cargo.lock
+rust-toolchain.toml
+rustfmt.toml
+clippy.toml
+bacon.toml
+build.rs
+.napi-generated.d.ts
+
+# Dev
+*.log
+*.tgz
+node_modules/
+coverage/
+.DS_Store

@@ -1,0 +1,20 @@
+[package]
+name = "crisp-core"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+description = "Pure Rust formatting engine for eslint-formatter-crisp"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+unicode-width = "0.2"
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+proptest = "1.5"
+
+[[bench]]
+name = "format"
+harness = false

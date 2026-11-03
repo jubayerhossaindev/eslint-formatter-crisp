@@ -1,0 +1,32 @@
+# ============================================================
+# ESLint Formatter Crisp — Rust Workspace
+# ============================================================
+
+[workspace]
+resolver = "3"
+
+members = ["crates/crisp-core", "crates/crisp-native"]
+
+# ------------------------------------------------------------
+# Shared Package Metadata
+# ------------------------------------------------------------
+
+[workspace.package]
+edition = "2024"
+license = "MIT"
+
+# ------------------------------------------------------------
+# Shared Internal Dependencies
+# ------------------------------------------------------------
+
+[workspace.dependencies]
+crisp-core = { path = "crates/crisp-core" }
+
+# ------------------------------------------------------------
+# Workspace-level Release Profile (Fixes Cargo Warnings)
+# ------------------------------------------------------------
+
+[profile.release]
+strip = true
+lto = "fat"
+codegen-units = 1

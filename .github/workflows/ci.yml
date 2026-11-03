@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    name: Lint, Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.18.0'
+          cache: 'npm'
+          cache-dependency-path: packages/eslint-formatter-crisp/package-lock.json
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - name: Install dependencies & Build
+        run: |
+          npm ci --no-audit --no-fund --force
+          npm run build
+        working-directory: packages/eslint-formatter-crisp
+
+      - name: Lint & Format Check
+        run: |
+          cargo fmt --all -- --check
+          cargo clippy --workspace --all-targets -- -D warnings
+          cargo clippy --workspace --all-targets --features crisp-native/noop -- -D warnings
+          npm run format:check
+          npm run lint --if-present
+        working-directory: packages/eslint-formatter-crisp
+
+      - name: Run Tests
+        run: |
+          npm run typecheck
+          npm run test:node
+          cargo test --workspace --features crisp-native/noop
+        working-directory: packages/eslint-formatter-crisp
