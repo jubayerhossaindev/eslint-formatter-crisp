@@ -2,7 +2,7 @@
 
 ### Features
 
-* **package:** publish eslint-formatter-crisp v1.0.0 ([6e1a371](https://github.com/jubayerhossaindev/eslint-formatter-crisp/commit/6e1a37100416b816822ddf7791e56f0bd27b7f4e))
+- **package:** publish eslint-formatter-crisp v1.0.0 ([6e1a371](https://github.com/jubayerhossaindev/eslint-formatter-crisp/commit/6e1a37100416b816822ddf7791e56f0bd27b7f4e))
 
 # Changelog
 
